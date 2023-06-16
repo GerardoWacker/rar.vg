@@ -54,6 +54,14 @@ export default class Dashboard extends React.Component
         this.displayMessage({type: 'important', message: "You've got unsaved changes!"}, true)
     }
 
+    updateUserDisplayName = (displayName) =>
+    {
+        // Upload
+        const oldUser = this.state.user
+        this.setState({user: {...oldUser, displayName: displayName}})
+        this.displayMessage({type: 'important', message: "You've got unsaved changes!"}, true)
+    }
+
     selectComponent = (key) =>
     {
         this.setState({component: key})
@@ -90,10 +98,10 @@ export default class Dashboard extends React.Component
 
     getSelectedComponent(id)
     {
-        switch(id)
+        switch (id)
         {
             case -2:
-                return {type: 'user'}
+                return {type: 'user', content: this.state.user}
             case -1:
                 return {type: 'sociallinks'}
             default:
@@ -121,7 +129,8 @@ export default class Dashboard extends React.Component
             <div className="dash-container2">
                 <div className="left-component">
                     <EditPanel updateLocally={this.updateComponentLocally} cancelSelection={this.cancelSelection}
-                               selectedComponent={this.getSelectedComponent(this.state.component)}/>
+                               selectedComponent={this.getSelectedComponent(this.state.component)}
+                               updateUserDisplayName={this.updateUserDisplayName}/>
                 </div>
                 <div className="right-component">
                     <div className="profile-container">

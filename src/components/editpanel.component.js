@@ -1,4 +1,6 @@
 import React from "react";
+import './editpanel.component.css'
+import config from "../../config/config.json";
 
 export default class EditPanel extends React.Component
 {
@@ -46,6 +48,29 @@ export default class EditPanel extends React.Component
             </div>
         switch (component.type)
         {
+            case 'user':
+                return <>
+                    <h3 className="m p-no-margin-top p-no-margin-bottom">Modificar usuario</h3>
+                    <div className="top">
+                        <div className="button-center">
+                            <button className="user-button"
+                                    style={{backgroundImage: "url(" + config.endpoint.host + "/avatar/" + component.content.id + ".png"}}/>
+                        </div>
+                        <h2 className="mm p-no-margin-bottom p-no-margin-top">Nombre a mostrar:</h2>
+                    </div>
+                    <div className="bottom">
+                        <input className="input" type="text"
+                               onChange={this.handleField2Change}/>
+                        <button className="delete-button">Eliminar cuenta</button>
+                        <button className="done-button"
+                                onClick={() => this.props.updateUserDisplayName(this.state.field2)}>Done
+                        </button>
+                    </div>
+                </>
+            case 'sociallinks':
+                return <>
+                    <span>linksk</span>
+                </>
             case 'generic':
                 return <>
                     <h3 className="m p-no-margin-top p-no-margin-bottom">Edit generic component</h3>
@@ -61,6 +86,19 @@ export default class EditPanel extends React.Component
                             description: this.state.field2
                         })}>Done
                         </button>
+                    </div>
+                </>
+            case 'pdf':
+                return <>
+                    <h3 className="m p-no-margin-top p-no-margin-bottom">Edit PDF component</h3>
+                    <button className="file-button">Upload file</button>
+                    <h2 className="s p-no-margin-bottom p-no-margin-top">Remember: only .pdf files allowed!</h2>
+                    <div className="pdf">
+                        <object data="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+                                type="application/pdf"></object>
+                    </div>
+                    <div className="margin-button">
+                        <button className="done-button">Done</button>
                     </div>
                 </>
         }
