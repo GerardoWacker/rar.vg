@@ -140,7 +140,7 @@ export default class LinkPanel extends React.Component
                 <dialog ref={ref => this.uploadingDialog = ref} className={"dashboard-modal"}>
                     <span className={"m"}>Uploading...</span>
                 </dialog>
-                <h3 className="m p-no-margin-top p-no-margin-bottom">Edit link list</h3>
+                <h3 className="m p-no-margin-top p-no-margin-bottom">Edit link</h3>
                 {this.props.drawMessage(this.state.linkMessage)}
                 <h2 className="s">Title:</h2>
                 <input className="input" onChange={this.handleLinkTitleChange}
