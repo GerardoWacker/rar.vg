@@ -12,6 +12,7 @@ import {colours, styles} from './profileDesigns/colour.util'
 import '../index.css'
 import SpotifyComponent from "../components/spotify.component";
 import YouTubeComponent from "../components/youtube.component";
+import LinkComponent from "../components/link.component";
 
 export default class Profile extends React.Component
 {
@@ -54,6 +55,10 @@ export default class Profile extends React.Component
                     return <SpotifyComponent id={component.content} key={key}/>
                 case 'youtube':
                     return <YouTubeComponent id={component.content} key={key}/>
+                case 'link':
+                    return <LinkComponent vertical={component.content.vertical} icon={component.content.icon}
+                                          url={component.content.url}
+                                          title={component.content.title} key={key}/>
             }
     }
 
@@ -62,8 +67,7 @@ export default class Profile extends React.Component
         if (!this.state.user)
         {
             return <div>Loading...</div>
-        }
-        else
+        } else
             return <div className={"content"} style={styles(this.state.user.profileDesign.colour || 0)}>
                 <div className="card">
                     <div className={"header-d" + this.state.user.profileDesign.design}>

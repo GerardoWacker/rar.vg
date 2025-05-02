@@ -33,6 +33,7 @@ import SpotifyPanel from "./panels/spotify.panel.component";
 import PDFPanel from "./panels/pdf.panel.component";
 import UserPanel from "./panels/user.panel.component";
 import SocialLinksPanel from "./panels/sociallinks.panel.component";
+import LinkPanel from "./panels/link.panel.component";
 
 const importAll = (r) => r.keys().map(r);
 const postFiles = importAll(require.context("../news/", true, /\.md$/))
@@ -182,6 +183,12 @@ export default class EditPanel extends React.Component
                                  deleteSelectedComponent={this.props.deleteSelectedComponent}
                                  cancel={this.cancel} saveLocally={this.saveLocally}
                                  updateLocallyWithoutCancelling={this.props.updateLocallyWithoutCancelling}
+                />
+            case 'link':
+                return <LinkPanel component={this.props.selectedComponent} drawMessage={this.drawMessage}
+                                  deleteSelectedComponent={this.props.deleteSelectedComponent}
+                                  cancel={this.cancel} saveLocally={this.saveLocally}
+                                  updateLocallyWithoutCancelling={this.props.updateLocallyWithoutCancelling}
                 />
             case 'linklist':
                 return <LinkListPanel component={this.props.selectedComponent}

@@ -17,6 +17,7 @@ import '../index.css'
 import SpotifyComponent from "./spotify.component";
 import YouTubeComponent from "./youtube.component";
 import {styles} from "../pages/profileDesigns/colour.util";
+import LinkComponent from "./link.component";
 
 export default class EditableProfile extends React.Component
 {
@@ -40,6 +41,10 @@ export default class EditableProfile extends React.Component
                     return <SpotifyComponent editing={true} id={component.content} key={key}/>
                 case 'youtube':
                     return <YouTubeComponent editing={true} id={component.content} key={key}/>
+                case 'link':
+                    return <LinkComponent editing={true} vertical={component.content.vertical} icon={component.content.icon}
+                                          url={component.content.url}
+                                          title={component.content.title} key={key}/>
             }
     }
 

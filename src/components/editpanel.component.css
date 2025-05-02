@@ -274,10 +274,25 @@ TEMPORARLY REMOVING FILE BUTTON STYLE
     display: block;
 }
 
-.special-mock .icon {
+.link-upload-icon {
     width: 100px;
     height: 100px;
     border-radius: 50px;
+}
+
+.delete-icon-button {
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    background-color: #cb0e0e !important;
+    color: white;
+    border: none;
+    display: inherit;
+    text-align: center;
+    width: 100%;
 }
 
 .delete {
@@ -447,6 +462,7 @@ TEMPORARLY REMOVING FILE BUTTON STYLE
     background: #ff9d9d;
     color: #962e2e;
 }
+
 .lp-cont .special-generate {
     /** Remove when that thing is added /shrug */
     display: none;
