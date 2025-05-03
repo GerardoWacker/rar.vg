@@ -125,7 +125,7 @@ export default class EditableProfile extends React.Component
 
                 <div className={"component add-component-button-container"}>
                     {
-                        this.props.user.components.length >= 5 ? <></> :
+                        this.props.user.components.length >= 13 ? <></> :
                             <button onClick={() => this.toggleModal()} className={"add-component-button"}>
                                 <IoIosAdd size={50}/>
                             </button>
