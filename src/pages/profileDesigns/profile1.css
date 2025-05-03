@@ -108,6 +108,8 @@ a:hover {
 }
 
 .reordering .editing {
+    min-height: 150px;
+    align-content: center;
     border-top: none;
     max-width: calc(100% - 200px);
 }
@@ -170,6 +172,18 @@ a:hover {
 
 .card  .reordering {
     background-image: radial-gradient(6px 6px at var(--dotDistance) calc(50% - 30px),
+    var(--dotColor) 50%, transparent 50%), radial-gradient(6px 6px at var(--dotDistance) calc(50% - 10px),
+    var(--dotColor) 50%, transparent 50%), radial-gradient(6px 6px at var(--dotDistance) calc(50% + 10px),
+    var(--dotColor) 50%, transparent 50%), radial-gradient(6px 6px at var(--dotDistance) calc(50% + 30px),
+    var(--dotColor) 50%, transparent 50%), radial-gradient(6px 6px at calc(var(--dotDistance) + 20px) calc(50% - 30px),
+    var(--dotColor) 50%, transparent 50%), radial-gradient(6px 6px at calc(var(--dotDistance) + 20px) calc(50% - 10px),
+    var(--dotColor) 50%, transparent 50%), radial-gradient(6px 6px at calc(var(--dotDistance) + 20px) calc(50% + 10px),
+    var(--dotColor) 50%, transparent 50%), radial-gradient(6px 6px at calc(var(--dotDistance) + 20px) calc(50% + 30px),
+    var(--dotColor) 50%, transparent 50%) !important;
+}
+
+.card .reordering:hover {
+    background: radial-gradient(6px 6px at var(--dotDistance) calc(50% - 30px),
     var(--dotColor) 50%, transparent 50%), radial-gradient(6px 6px at var(--dotDistance) calc(50% - 10px),
     var(--dotColor) 50%, transparent 50%), radial-gradient(6px 6px at var(--dotDistance) calc(50% + 10px),
     var(--dotColor) 50%, transparent 50%), radial-gradient(6px 6px at var(--dotDistance) calc(50% + 30px),
