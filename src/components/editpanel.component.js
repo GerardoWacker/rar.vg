@@ -170,6 +170,7 @@ export default class EditPanel extends React.Component
                 return <DesignPanel
                     updateProfileDesign={this.props.updateProfileDesign}
                     updateProfileColours={this.props.updateProfileColours}
+                    cancel={this.cancel}
                 />
             case 'generic':
                 return <GenericPanel component={this.props.selectedComponent}

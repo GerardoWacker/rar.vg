@@ -37,7 +37,9 @@ export default class DesignPanel extends React.Component
             <div className={"theme-picker-buttons"}>
                 {this.colourButtons(colours)}
             </div>
-
+            <div className={"button-container"} style={{justifyContent: "right"}}>
+                <button className="button" onClick={() => this.props.cancel()}>Done</button>
+            </div>
         </>
     }
 }
