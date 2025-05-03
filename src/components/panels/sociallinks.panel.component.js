@@ -151,10 +151,7 @@ export default class SocialLinksPanel extends React.Component
             <h2 className="s p-no-margin-bottom p-no-margin-top title">Links:</h2>
             {this.props.user.sociallinks.map((link, key) => (
                 <div>{this.socialLinkEditItem(link, key, this.state.selectedLink === key)}</div>))}
-            <div className={"button-container"}>
-                <button className="button delete-button"
-                        onClick={() => this.props.deleteSelectedComponent()}>Delete component
-                </button>
+            <div className={"button-container"} style={{justifyContent: "right"}}>
                 <button className="button" onClick={() => this.props.cancel()}>Done</button>
             </div>
         </>
