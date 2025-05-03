@@ -21,20 +21,6 @@ export default class UserPanel extends React.Component
         this.handleDisplayNameChange = this.handleDisplayNameChange.bind(this)
     }
 
-    colourButton = (theme, key) =>
-    {
-        return <button className={"colour-theme-button"} key={key} style={{
-            background: `linear-gradient(135deg, ${theme.background} 50%, ${theme.card} 50%)`
-        }} onClick={() => this.props.updateProfileColours(key)}/>
-    }
-
-    colourButtons = (themes) =>
-    {
-        return themes.map((theme, key) => (
-            this.colourButton(theme, key)
-        ))
-    }
-
     handleDisplayNameChange(event)
     {
         this.setState({displayName: event.target.value})
@@ -114,21 +100,6 @@ export default class UserPanel extends React.Component
                     <button className="button"
                             onClick={() => this.updateDisplayName(this.state.displayName)}>Done
                     </button>
-                </div>
-                <h3 style={{marginBottom: "0", paddingBottom: "0"}} className="mm p-no-margin-bottom">Change
-                    profile design</h3>
-                <div className='list-button-container'>
-                    <button className="button unraised link-img" type="button"
-                            onClick={() => this.props.updateProfileDesign(1)}>
-                        <img src={prof1} alt={'Profile type 1'}/>
-                    </button>
-                    <button style={{marginLeft: "10%"}} className="button unraised link-img"
-                            onClick={() => this.props.updateProfileDesign(2)}>
-                        <img src={prof2} alt={'Profile type 2'}/>
-                    </button>
-                </div>
-                <div className={"theme-picker-buttons"}>
-                    {this.colourButtons(colours)}
                 </div>
                 <h4 className={'mm p-no-margin-bottom'}>Danger zone</h4>
                 <Link to={"/delete-account"}>

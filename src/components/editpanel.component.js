@@ -34,6 +34,7 @@ import PDFPanel from "./panels/pdf.panel.component";
 import UserPanel from "./panels/user.panel.component";
 import SocialLinksPanel from "./panels/sociallinks.panel.component";
 import LinkPanel from "./panels/link.panel.component";
+import DesignPanel from "./panels/design.panel.component";
 
 const importAll = (r) => r.keys().map(r);
 const postFiles = importAll(require.context("../news/", true, /\.md$/))
@@ -50,6 +51,11 @@ export default class EditPanel extends React.Component
     editProfile = () =>
     {
         this.props.selectComponent(-2)
+    }
+
+    editDesign = () =>
+    {
+        this.props.selectComponent(-3)
     }
 
     clearState = () =>
@@ -133,7 +139,7 @@ export default class EditPanel extends React.Component
                                 color: styles(this.props.user.profileDesign.colour || 0)["--profile-text-accent"],
                                 backgroundColor: styles(this.props.user.profileDesign.colour || 0)["--card-background"],
                             }}
-                            onClick={() => this.editProfile()}>
+                            onClick={() => this.editDesign()}>
                         <span className={'s'}>Change profile design</span>
                     </button>
                     <button className={'entry'} onClick={() => this.reorder()}>
@@ -159,8 +165,11 @@ export default class EditPanel extends React.Component
                                   updateDisplayName={this.props.updateDisplayName}
                                   reloadImage={this.props.reloadImage}
                                   user={this.props.user}
-                                  updateProfileDesign={this.props.updateProfileDesign}
-                                  updateProfileColours={this.props.updateProfileColours}
+                />
+            case 'design':
+                return <DesignPanel
+                    updateProfileDesign={this.props.updateProfileDesign}
+                    updateProfileColours={this.props.updateProfileColours}
                 />
             case 'generic':
                 return <GenericPanel component={this.props.selectedComponent}
