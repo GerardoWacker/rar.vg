@@ -306,6 +306,8 @@ export default class Dashboard extends React.Component
     {
         switch (id)
         {
+            case -3:
+                return {type: 'design'}
             case -2:
                 return {type: 'user'}
             case -1:
