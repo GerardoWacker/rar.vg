@@ -13,6 +13,7 @@ import '../index.css'
 import SpotifyComponent from "../components/spotify.component";
 import YouTubeComponent from "../components/youtube.component";
 import LinkComponent from "../components/link.component";
+import ColumnComponent from "../components/column.component";
 
 export default class Profile extends React.Component
 {
@@ -59,6 +60,8 @@ export default class Profile extends React.Component
                     return <LinkComponent vertical={component.content.vertical} icon={component.content.icon}
                                           url={component.content.url}
                                           title={component.content.title} key={key}/>
+                case 'column':
+                    return <ColumnComponent components={component.content} key={key} />
             }
     }
 

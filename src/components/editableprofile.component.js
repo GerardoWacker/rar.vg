@@ -18,6 +18,7 @@ import SpotifyComponent from "./spotify.component";
 import YouTubeComponent from "./youtube.component";
 import {styles} from "../pages/profileDesigns/colour.util";
 import LinkComponent from "./link.component";
+import ColumnComponent from "./column.component";
 
 export default class EditableProfile extends React.Component
 {
@@ -42,9 +43,12 @@ export default class EditableProfile extends React.Component
                 case 'youtube':
                     return <YouTubeComponent editing={true} id={component.content} key={key}/>
                 case 'link':
-                    return <LinkComponent editing={true} vertical={component.content.vertical} icon={component.content.icon}
+                    return <LinkComponent editing={true} vertical={component.content.vertical}
+                                          icon={component.content.icon}
                                           url={component.content.url}
                                           title={component.content.title} key={key}/>
+                case 'column':
+                    return <ColumnComponent editing={true} components={component.content} key={key}/>
             }
     }
 
@@ -52,6 +56,7 @@ export default class EditableProfile extends React.Component
     {
         this.props.selectComponent(key)
     }
+
 
     updateOrder = (from, to) =>
     {
@@ -68,15 +73,20 @@ export default class EditableProfile extends React.Component
 
         return <ReactDragListView {...dragProps}>
             <ul style={{listStyle: "none", paddingInlineStart: 0}}>
-                {this.props.user.components.map((component, key) => (
-                    <li className={"selectableComponent" + (this.props.reordering ? " reordering" : "")}
-                        onClick={() => this.selectComponent(key)}>
+                {this.props.user.components.map((component, key) =>
+                {
+                    const isBeingGrouped = this.props.group.includes(key)
+                    return (<li className={"selectableComponent" +
+                        (this.props.reordering ? " reordering" : (this.props.grouping ? " grouping" : "")) +
+                        (isBeingGrouped ? " group-selected" : "")}
+                                onClick={() => this.selectComponent(key)}>
                         {this.component(component, key)}
                         <div className={'reorder-buttons'}>
                             <button onClick={() => this.updateOrder(key, key - 1)}><FaArrowUp size={20}/></button>
                             <button onClick={() => this.updateOrder(key, key + 1)}><FaArrowDown size={20}/></button>
                         </div>
-                    </li>))}
+                    </li>)
+                })}
             </ul>
         </ReactDragListView>
     }
@@ -88,6 +98,7 @@ export default class EditableProfile extends React.Component
 
     render()
     {
+        if (this.props.group === null) return <div></div>
         return <div className={"content"} style={styles(this.props.user.profileDesign.colour || 0)}>
             <div className="card">
                 <div className={"header-d" + this.props.user.profileDesign.design}>
@@ -124,12 +135,6 @@ export default class EditableProfile extends React.Component
                 {this.loadComponents()}
 
                 <div className={"component add-component-button-container"}>
-                    {
-                        this.props.user.components.length >= 13 ? <></> :
-                            <button onClick={() => this.toggleModal()} className={"add-component-button"}>
-                                <IoIosAdd size={50}/>
-                            </button>
-                    }
                 </div>
             </div>
         </div>

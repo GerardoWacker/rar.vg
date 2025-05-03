@@ -432,6 +432,10 @@ TEMPORARLY REMOVING FILE BUTTON STYLE
     display: none;
 }
 
+.outer-mock .default .grouping {
+    display: none;
+}
+
 .default .entry {
     display: inline-flex;
     align-items: center;

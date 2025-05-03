@@ -135,6 +135,25 @@ a:hover {
     box-shadow: 0 2px 8px 0 var(--select-component), 0 2px 8px 0 var(--select-component);
 }
 
+.grouping {
+    max-height: 130px;
+    overflow: hidden;
+    border-radius: 30px;
+    margin: 15px 20px;
+    box-shadow: 0 4px 10px 0 var(--select-component), 0 4px 10px 0 var(--select-component);
+    display: flex;
+    justify-content: space-between;
+}
+
+.group-selected {
+    border: solid 3px var(--profile-text-accent);
+}
+
+.grouping .editing {
+    width: 100%;
+    border-top: none;
+}
+
 .card .component img {
     max-width: 100%;
 }

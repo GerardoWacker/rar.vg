@@ -24,6 +24,10 @@ export default class Dashboard extends React.Component
             reordering: false,
             lastReloaded: Date.now(),
 
+            // Grouping
+            grouping: true,
+            group: [],
+
             // Version history
             hist: [],
 
@@ -121,9 +125,54 @@ export default class Dashboard extends React.Component
     selectComponent = (key) =>
     {
         if (this.state.reordering === true) return
+        if (this.state.grouping === true) return this.selectComponentForGrouping(key)
         this.editPanel.current.clearState()
         this.setState({component: key})
         this.editPanel.current.handleNecessaryUpdates(this.getSelectedComponent(key))
+    }
+
+    selectComponentForGrouping = (key) =>
+    {
+        if (key < 0) return
+        const oldGroup = this.state.group
+        if (this.state.group.includes(key))
+        {
+            const index = this.state.group.indexOf(key)
+            oldGroup.splice(index, 1)
+            return this.setState({group: oldGroup})
+        }
+        oldGroup.push(key)
+        this.setState({group: oldGroup})
+    }
+
+    toggleGrouping = () =>
+    {
+        const oldGroup = !this.state.grouping
+        this.setState({grouping: oldGroup})
+    }
+
+    groupComponents = () =>
+    {
+        return new Promise(res =>
+        {
+            const oldUser = this.state.user
+            const oldGroup = this.state.group
+            const column = {type: "column", content: []}
+            oldGroup.map((componentPosition, key) =>
+            {
+                const component = oldUser.components[componentPosition]
+                column.content.push(component)
+            })
+            oldUser.components[oldGroup[0]] = column
+            oldGroup.map((componentPosition, key) =>
+            {
+                if (key !== 0)
+                    oldUser.components.splice(componentPosition, 1)
+            })
+            console.log(column)
+            this.setState({group: [], user: oldUser, grouping: false})
+            res(column)
+        })
     }
 
     toggleReordering = () =>
@@ -515,11 +564,16 @@ export default class Dashboard extends React.Component
                         updateProfileColours={this.updateProfileColours}
                         toggleReordering={this.toggleReordering}
                         reordering={this.state.reordering}
+                        grouping={this.state.grouping}
+                        toggleGrouping={this.toggleGrouping}
+                        groupComponents={this.groupComponents}
                     />
                 </div>
                 <div className="right-component">
                     <div className="profile-container">
                         <EditableProfile reordering={this.state.reordering}
+                                         grouping={this.state.grouping}
+                                         group={this.state.group}
                                          selectComponent={this.selectComponent}
                                          toggleModal={this.toggleModal} user={this.state.user}
                                          lastReloaded={this.state.lastReloaded}

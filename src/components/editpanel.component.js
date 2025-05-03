@@ -1,31 +1,11 @@
 import React from "react";
-import {AiFillEdit, AiOutlineClose, AiOutlineCheck} from "react-icons/ai"
 import {
-    FaSteam,
-    FaItunesNote,
-    FaBitcoin,
-    FaEthereum,
-    FaDiscord,
-    FaTiktok,
-} from "react-icons/fa";
-import {CgWebsite} from "react-icons/cg";
-import {SiCashapp} from "react-icons/si";
-import {
-    BsSpotify,
-    BsInstagram,
-    BsTwitter,
-    BsFacebook,
-    BsGithub,
-    BsTwitch,
-    BsYoutube,
-    BsLinkedin, BsStars,
+    BsStars,
 } from "react-icons/bs";
 import "./editpanel.component.css"
-import {upload} from "../utils/session.util";
-import config from '../utils/config.util'
-import Link from "../router/link";
-import {colours, styles} from "../pages/profileDesigns/colour.util";
-import {IoIosList, IoMdAdd, IoMdCloudUpload} from "react-icons/io";
+import {styles} from "../pages/profileDesigns/colour.util";
+import {IoIosList, IoMdAdd} from "react-icons/io";
+import {AiOutlineGroup, AiOutlineUngroup} from "react-icons/ai";
 import GenericPanel from "./panels/generic.panel.component";
 import LinkListPanel from "./panels/linklist.panel.component";
 import YoutubePanel from "./panels/youtube.panel.component";
@@ -35,6 +15,7 @@ import UserPanel from "./panels/user.panel.component";
 import SocialLinksPanel from "./panels/sociallinks.panel.component";
 import LinkPanel from "./panels/link.panel.component";
 import DesignPanel from "./panels/design.panel.component";
+import ColumnPanel from "./panels/column.panel.component";
 
 const importAll = (r) => r.keys().map(r);
 const postFiles = importAll(require.context("../news/", true, /\.md$/))
@@ -111,11 +92,35 @@ export default class EditPanel extends React.Component
         this.props.toggleReordering()
     }
 
+    toggleGroup = () =>
+    {
+        this.props.toggleGrouping()
+    }
+
+    group = () =>
+    {
+        this.props.groupComponents().then(column => console.log(this.props.user))
+    }
+
     renderFields = (component) =>
     {
         if (!component)
             return <div className={"default"}>
-                <div className={(this.props.reordering ? "" : " reordering")}>
+                <div className={(this.props.grouping ? "" : "grouping")}>
+                    <span className={"m"}>Group components</span><br/><br/>
+                    <span className={"s"}>Select components to group horizontally</span><br/>
+                    <br/><br/>
+                    <button className={'entry'} onClick={() => this.group()}>
+                        <AiOutlineGroup size={20}/>
+                        <span className={'s'}>Create group</span>
+                    </button>
+                    <button className={'entry stop-reorder'} onClick={() => this.toggleGroup()}>
+                        <AiOutlineUngroup size={20}/>
+                        <span className={'s'}>Stop grouping</span>
+                    </button>
+                </div>
+
+                <div className={(this.props.reordering ? "" : (this.props.grouping ? "grouping" : "reordering"))}>
                     <span className={"m"}>Reorder mode</span><br/><br/>
                     <span className={"s"}>Drag and drop components to change its position</span><br/>
                     <span className={"s"}>Use the arrows to rearrange each component individually</span>
@@ -126,13 +131,14 @@ export default class EditPanel extends React.Component
                     </button>
                 </div>
 
-                <div className={(this.props.reordering ? " reordering" : "")}>
+                <div className={(this.props.reordering ? "reordering" : (this.props.grouping ? "grouping" : ""))}>
                     <span className={"m"}>Start editing</span><br/><br/>
                     <span className={"s"}>Click on a component to begin editing</span><br/>
                     <span className={"s"}>Toggle reorder to change a component's position</span>
                 </div>
 
-                <div className={"lp-cont" + (this.props.reordering ? " reordering" : "")}>
+                <div
+                    className={"lp-cont" + (this.props.reordering ? " reordering" : (this.props.grouping ? " grouping" : ""))}>
                     <span className={'m'}>Quick actions</span><br/><br/>
                     <button className={'entry'}
                             style={{
@@ -216,6 +222,13 @@ export default class EditPanel extends React.Component
                 />
             case "spotify":
                 return <SpotifyPanel component={this.props.selectedComponent}
+                                     drawMessage={this.drawMessage}
+                                     deleteSelectedComponent={this.props.deleteSelectedComponent}
+                                     cancel={this.cancel} saveLocally={this.saveLocally}
+                                     updateLocallyWithoutCancelling={this.props.updateLocallyWithoutCancelling}
+                />
+            case "column":
+                return <ColumnPanel component={this.props.selectedComponent}
                                      drawMessage={this.drawMessage}
                                      deleteSelectedComponent={this.props.deleteSelectedComponent}
                                      cancel={this.cancel} saveLocally={this.saveLocally}

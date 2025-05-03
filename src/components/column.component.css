@@ -1,0 +1,24 @@
+.column-component-base {
+    display: flex;
+    margin: 0 50px;
+    padding: 10px 0;
+    justify-content: space-between;
+}
+
+.column-item-container .component {
+    border-top: none !important;
+    margin: 0 5px !important;
+    padding: 0 !important;
+}
+
+.column-item-container .component h2 {
+    font-size: 20px;
+}
+
+.column-item-container .no-margin-left {
+    margin-left: 0 !important;
+}
+
+.column-item-container .no-margin-right {
+    margin-right: 0 !important;
+}
