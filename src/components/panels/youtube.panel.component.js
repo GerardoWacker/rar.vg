@@ -59,7 +59,7 @@ export default class YoutubePanel extends React.Component
                 <button className="delete-component"
                         onClick={() => this.props.deleteSelectedComponent()}>Delete component
                 </button>
-                <button className="done-button" onClick={() => this.cancel()}>Done</button>
+                <button className="done-button" onClick={() => this.props.cancel()}>Done</button>
             </div>
         </>
     }
